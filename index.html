@@ -104,6 +104,17 @@ details{margin:10px 0}summary{min-height:44px;display:flex;align-items:center;fo
 .landing{padding-top:40px}
 @media (prefers-reduced-motion:reduce){#toast{transition:none}}
 @media (max-width:360px){body{font-size:17px}.qbtn{font-size:17px}.row3 .qbtn{font-size:16px}}
+/* next-nursing countdown banner */
+:root{--nbbg:#efe4f3;--nbink:#4b2a57;--nbsoon:#fff0d9;--nbsoonink:#7a4a00;--nbsoonline:#f2c27c;--nbdue:#ffe7cc;--nbdueink:#8a4210;--nbdueline:#e8a060}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--nbbg:#32283a;--nbink:#e6cff0;--nbsoon:#3f3220;--nbsoonink:#f3cd8e;--nbsoonline:#7a5a2c;--nbdue:#46301f;--nbdueink:#ffc08a;--nbdueline:#8f5a2e}}
+:root[data-theme=dark]{--nbbg:#32283a;--nbink:#e6cff0;--nbsoon:#3f3220;--nbsoonink:#f3cd8e;--nbsoonline:#7a5a2c;--nbdue:#46301f;--nbdueink:#ffc08a;--nbdueline:#8f5a2e}
+.nb{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;margin:0 0 8px;padding:8px 14px;border-radius:14px;border:1px solid transparent;background:var(--nbbg);color:var(--nbink);font-size:17px;font-weight:600;text-align:left;transition:background-color .6s,color .6s}
+.nb .nbi{font-size:18px}.nb>span:nth-child(2){flex:1}.nb .nbt{font-variant-numeric:tabular-nums;font-weight:800}
+.nb .nbe{font-size:13px;font-weight:600;opacity:.75;white-space:nowrap}
+.nb.soon{background:var(--nbsoon);color:var(--nbsoonink);border-color:var(--nbsoonline)}
+.nb.due{background:var(--nbdue);color:var(--nbdueink);border-color:var(--nbdueline)}
+.nb.run{background:var(--feed);color:var(--ink);border-color:var(--pri)}
+@media (prefers-reduced-motion:reduce){.nb{transition:none}}
 </style>
 </head>
 <body>
