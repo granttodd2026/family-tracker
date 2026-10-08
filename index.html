@@ -115,6 +115,17 @@ details{margin:10px 0}summary{min-height:44px;display:flex;align-items:center;fo
 .nb.due{background:var(--nbdue);color:var(--nbdueink);border-color:var(--nbdueline)}
 .nb.run{background:var(--feed);color:var(--ink);border-color:var(--pri)}
 @media (prefers-reduced-motion:reduce){.nb{transition:none}}
+.promptcard{margin:14px 0}
+.times .fld{margin:6px 0}.times input{min-width:0}
+.guide .gtitle{font-size:20px;font-weight:700;margin:4px 0 10px}
+.gsec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:8px 0;padding:0 14px}
+.gsec>summary{min-height:56px;font-size:18px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gsec>summary::-webkit-details-marker{display:none}
+.gsec>summary::after{content:'▸';color:var(--mute);font-size:16px}.gsec[open]>summary::after{content:'▾'}
+.gbody{padding-bottom:12px}.gbody p{margin:8px 0}
+.glist{padding-left:20px;margin:6px 0}.glist li{margin:7px 0}
+.gsec.gred{border:2px solid var(--bad)}.gsec.gred>summary{color:var(--bad)}
+.guide a{color:var(--pri);font-weight:600;text-underline-offset:3px;word-break:break-word;display:inline-block;min-height:32px;padding:4px 0}
 </style>
 </head>
 <body>
