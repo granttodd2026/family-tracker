@@ -126,10 +126,18 @@ details{margin:10px 0}summary{min-height:44px;display:flex;align-items:center;fo
 .glist{padding-left:20px;margin:6px 0}.glist li{margin:7px 0}
 .gsec.gred{border:2px solid var(--bad)}.gsec.gred>summary{color:var(--bad)}
 .guide a{color:var(--pri);font-weight:600;text-underline-offset:3px;word-break:break-word;display:inline-block;min-height:32px;padding:4px 0}
+.crow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.crow .btn{flex:1 1 140px;min-height:52px;display:inline-flex}
+.ctoday{font-weight:700}.cmissing{font-weight:600;color:var(--mute)}.cprompt{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;font-weight:600}.clater{font-size:16px;color:var(--mute);margin:18px 0 4px}
+.gsec.coach.gred{background:var(--badbg)}.gsec.coach.gred .gbody{color:var(--ink)}
+.topbanner{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:532px;margin:10px auto 0;padding:10px 14px;border-radius:14px;background:var(--card);border:2px solid var(--pri);font-weight:600}
+.topbanner[hidden]{display:none}
+.topbanner .btn{min-height:48px}
 </style>
 </head>
 <body>
-<main id="main" aria-live="polite"><p style="padding:40px 0;color:#888">Loading…</p></main>
+<div id="update" class="topbanner" hidden><span>A new version is ready.</span><button class="btn primary" id="update-btn" data-act="update">Update</button></div>
+<div id="err" class="topbanner" role="alert" hidden><span>Something went wrong. Your entries are safe on this phone.</span><button class="btn" id="err-btn" data-act="reload">Reload</button></div>
+<main id="main"><p style="padding:40px 0;color:var(--mute)">Loading…</p></main>
 <nav id="nav" hidden aria-label="Sections">
   <button data-act="tab" data-tab="today"><span aria-hidden="true">🏠</span>Today</button>
   <button data-act="tab" data-tab="mom"><span aria-hidden="true">💗</span>Mom</button>
@@ -139,6 +147,7 @@ details{margin:10px 0}summary{min-height:44px;display:flex;align-items:center;fo
 </nav>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="sheet" hidden></div>
+<input type="file" id="restorein" accept=".json,application/json" hidden aria-hidden="true" tabindex="-1">
 <script type="module" src="app.js"></script>
 </body>
 </html>
