@@ -150,6 +150,16 @@ details{margin:10px 0}summary{min-height:44px;display:flex;align-items:center;fo
  .check{border:0;padding:0;min-height:0;background:none}.box{width:12pt;height:12pt}
 }
 .stoolcard .sfull{width:100%}.stoolcard .chips{margin-top:8px}.stoolwarn{border-color:var(--bad);background:var(--badbg)}.stoolwarn .btitle{color:var(--bad)}
+:root[data-night]{--bg:#0d0504;--card:#1c0b08;--ink:#ffb8a6;--mute:#d9937f;--line:#4a1f17;--pri:#ff8f70;--priink:#0d0504;--feed:#2a100b;--diaper:#22100c;--mom:#26100d;--ok:#ffb8a6;--warn:#ffb070;--bad:#ff9a8a;--badbg:#2e0d0a;--chip:#26100c;--shadow:none;--nbbg:#22100c;--nbink:#ffb8a6;--nbsoon:#2a140c;--nbsoonink:#ffc09a;--nbsoonline:#7a3a24;--nbdue:#331509;--nbdueink:#ffc08a;--nbdueline:#8f4a2e}
+:root[data-night] #toast{background:#2a0f0a;color:#ffc8b8;border:1px solid #6a2a1c}:root[data-night] #toast button{color:#ffd8cc;background:transparent}
+:root[data-night] img{filter:sepia(1) saturate(3) hue-rotate(-30deg) brightness(.7)}
+.nightrow{display:flex;justify-content:flex-end;margin:6px 0 -4px}
+.night{display:flex;flex-direction:column;min-height:calc(100vh - 110px)}.nhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.nhead h1{font-size:26px}
+.nstat{font-size:20px;margin:4px 0 8px}.nsteps h2{font-size:18px;margin:6px 0}.nchk{display:grid;grid-template-columns:1fr 1fr;gap:8px}.nchk .check{min-height:56px}
+.nzone{margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:10px}
+.nzone .row2,.nzone .row3{display:grid;gap:10px}.nzone .row2{grid-template-columns:1fr 1fr}.nzone .row3{grid-template-columns:1fr 1fr 1fr}
+.nbtn{position:relative;min-height:84px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:22px;font-weight:700}
+.nbtn.feed{background:var(--feed)}.nbtn.on{border-color:var(--pri);outline:3px solid var(--pri)}.nhint{position:absolute;top:6px;right:10px;font-size:13px;background:var(--pri);color:var(--priink);border-radius:8px;padding:1px 6px}
 .topbanner{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:532px;margin:10px auto 0;padding:10px 14px;border-radius:14px;background:var(--card);border:2px solid var(--pri);font-weight:600}
 .topbanner[hidden]{display:none}
 .topbanner .btn{min-height:48px}
