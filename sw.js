@@ -2,7 +2,7 @@
 // Versioned cache (stamped by build.sh), cache-first shell (instant and immune to weak Wi-Fi), and a
 // PROMPTED update: a new worker waits until the user taps "Update" (no unconditional skipWaiting),
 // so an open page never mixes old and new files.
-const VERSION = '1.8.2+202610100718';
+const VERSION = '1.8.3+202610100923';
 const C = 'melody-' + VERSION;
 const SHELL = ['./', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/apple-touch-icon.png'];
 self.addEventListener('install', (e) => {
@@ -33,7 +33,7 @@ self.addEventListener('fetch', (e) => {
 self.addEventListener('push', (e) => {
   let d = {}; try { d = e.data ? e.data.json() : {}; } catch { d = { title: e.data && e.data.text() }; }
   e.waitUntil(self.registration.showNotification(d.title || 'Reminder', {
-    body: d.body || '', tag: d.tag || 'reminder', renotify: true, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: d.data || {},
+    body: d.body || '', tag: d.tag || 'reminder', renotify: !d.quiet, silent: !!d.quiet, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: d.data || {},
   }));
 });
 self.addEventListener('notificationclick', (e) => {
