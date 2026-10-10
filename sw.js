@@ -2,7 +2,7 @@
 // Versioned cache (stamped by build.sh), cache-first shell (instant and immune to weak Wi-Fi), and a
 // PROMPTED update: a new worker waits until the user taps "Update" (no unconditional skipWaiting),
 // so an open page never mixes old and new files.
-const VERSION = '1.8.3+202610100923';
+const VERSION = '1.8.4+202610101102';
 const C = 'melody-' + VERSION;
 const SHELL = ['./', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/apple-touch-icon.png'];
 self.addEventListener('install', (e) => {
@@ -30,15 +30,18 @@ self.addEventListener('fetch', (e) => {
 });
 
 // Lock-screen reminders (payload is end-to-end encrypted by Web Push; only generic text).
+// Usage counts (event names only) for the app's hourly encrypted rollup; read and cleared by the app.
+async function bumpUsage(k) { try { const c = await caches.open('mt-usage'); const r = await c.match('push'); const o = r ? await r.json() : {}; o[k] = (o[k] || 0) + 1; await c.put('push', new Response(JSON.stringify(o))); } catch {} }
 self.addEventListener('push', (e) => {
   let d = {}; try { d = e.data ? e.data.json() : {}; } catch { d = { title: e.data && e.data.text() }; }
-  e.waitUntil(self.registration.showNotification(d.title || 'Reminder', {
+  e.waitUntil(Promise.all([bumpUsage('delivered:' + String(d.tag || 'reminder').replace(/^med-.*/, 'med').replace(/[^a-z0-9-]/gi, '').slice(0, 20)), self.registration.showNotification(d.title || 'Reminder', {
     body: d.body || '', tag: d.tag || 'reminder', renotify: !d.quiet, silent: !!d.quiet, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: d.data || {},
-  }));
+  })]));
 });
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
   e.waitUntil((async () => {
+    await bumpUsage('opened');
     const all = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
     for (const c of all) if ('focus' in c) return c.focus();
     return self.clients.openWindow('./');
