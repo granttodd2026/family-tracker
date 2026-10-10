@@ -2,7 +2,7 @@
 // Versioned cache (stamped by build.sh), cache-first shell (instant and immune to weak Wi-Fi), and a
 // PROMPTED update: a new worker waits until the user taps "Update" (no unconditional skipWaiting),
 // so an open page never mixes old and new files.
-const VERSION = '1.10.0+202610101210';
+const VERSION = '1.11.0+202610101325';
 const C = 'melody-' + VERSION;
 const SHELL = ['./', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/apple-touch-icon.png'];
 self.addEventListener('install', (e) => {
