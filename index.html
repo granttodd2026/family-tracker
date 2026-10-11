@@ -20,9 +20,13 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1b1720;--card:#28222e;--ink:#f3ecf2;--mute:#b8aab5;--line:#3d3444;--pri:#c99be0;--priink:#1b1720;--feed:#4a3128;--diaper:#22384d;--mom:#3d2a47;--ok:#7fd7a5;--warn:#f0b35c;--bad:#ff8a80;--badbg:#4a2422;--chip:#352d3c;--shadow:none}}
 :root[data-theme=dark]{--bg:#1b1720;--card:#28222e;--ink:#f3ecf2;--mute:#b8aab5;--line:#3d3444;--pri:#c99be0;--priink:#1b1720;--feed:#4a3128;--diaper:#22384d;--mom:#3d2a47;--ok:#7fd7a5;--warn:#f0b35c;--bad:#ff8a80;--badbg:#4a2422;--chip:#352d3c;--shadow:none}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) 0 calc(84px + env(safe-area-inset-bottom));-webkit-tap-highlight-color:transparent}
-body.noscroll{overflow:hidden}
-#main{max-width:560px;margin:0 auto;padding:12px 14px}
+/* v1.12.1 fixed app shell: the document never scrolls; only #main does. The tab bar is a normal flex item at the
+   bottom (no position:fixed), so iOS standalone momentum scroll / re-renders cannot detach it mid-screen. */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) 0 0;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column}
+body>*{flex:0 0 auto}
+body.noscroll #main{overflow:hidden}
+#main{flex:1 1 auto;min-height:0;width:100%;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding:12px max(14px,calc((100% - 532px) / 2)) 16px}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--pri);outline-offset:2px}
@@ -81,7 +85,7 @@ h1{font-size:30px;margin:0;line-height:1.1}h2{font-size:21px;margin:22px 0 10px}
 .box{flex:none;width:32px;height:32px;border-radius:9px;border:2.5px solid var(--pri);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--priink)}
 .done .box{background:var(--pri)}.done .stext{text-decoration:line-through;color:var(--mute)}
 .stext .tiny{text-decoration:none}
-nav#nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav#nav{position:relative;flex:0 0 auto;width:100%;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom);z-index:5}
 nav#nav button{background:none;border:0;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--mute);gap:2px}
 nav#nav button span{font-size:24px}nav#nav button[aria-current=page]{color:var(--pri)}
 #toast{position:fixed;left:12px;right:12px;bottom:calc(80px + env(safe-area-inset-bottom));max-width:536px;margin:0 auto;background:var(--ink);color:var(--bg);border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:8px;transform:translateY(30px);opacity:0;visibility:hidden;pointer-events:none;transition:transform .2s,opacity .2s,visibility .2s;z-index:6;font-size:16px}
@@ -144,6 +148,7 @@ details{margin:10px 0}summary{min-height:44px;display:flex;align-items:center;fo
 .d24row{font-size:32px;font-weight:700;margin:10px 0;line-height:1.25}.d24n{font-size:40px}.d24last{font-weight:600}.dactions{display:flex;flex-direction:column;gap:10px;margin:12px 0 20px}
 @media print{
  @page{margin:12mm}
+ html,body{height:auto!important;overflow:visible!important;display:block!important}#main{overflow:visible!important}
  body{background:#fff!important;color:#000!important;padding:0!important;font-size:12pt}
  nav#nav,#toast,#update,#sheet,.topbanner,.noprint,header.top{display:none!important}
  .doctor{font-size:12pt}.doctor h1{font-size:20pt}.dsec{border:1px solid #999;background:#fff!important;break-inside:avoid;page-break-inside:avoid;margin:6pt 0;padding:6pt 8pt}
